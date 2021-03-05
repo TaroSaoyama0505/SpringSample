@@ -46,4 +46,8 @@ public class SignupForm {
     //falseのみ可能
     @AssertFalse(groups = ValidGroup2.class, message = "{false_check}")
     private boolean marriage; // 結婚ステータス
+
+    //必須入力
+    @NotBlank(groups = ValidGroup1.class, message = "{require_check}")
+    private String favoriteFood; // 好きな食べ物
 }

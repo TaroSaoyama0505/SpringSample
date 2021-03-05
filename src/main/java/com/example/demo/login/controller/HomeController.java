@@ -96,6 +96,7 @@ public class HomeController {
 			form.setBirthday(user.getBirthday()); //誕生日
 			form.setAge(user.getAge()); //年齢
 			form.setMarriage(user.isMarriage()); //結婚ステータス
+			form.setFavoriteFood(user.getFavoriteFood());//好きな
 
 			// Modelに登録
 			model.addAttribute("signupForm", form);
@@ -103,6 +104,51 @@ public class HomeController {
 
 		return "login/homeLayout";
 	}
+
+	/**
+	 * ユーザー更新用処理.
+	 */
+	@PostMapping(value = "/mypage", params = "update")
+	public String postMypageUpdate(@ModelAttribute SignupForm form,
+			Model model) {
+
+		System.out.println("更新ボタンの処理");
+
+		//Userインスタンスの生成
+		User user = new User();
+
+		//フォームクラスをUserクラスに変換
+		user.setUserId(form.getUserId());
+		user.setPassword(form.getPassword());
+		user.setUserName(form.getUserName());
+		user.setBirthday(form.getBirthday());
+		user.setAge(form.getAge());
+		user.setMarriage(form.isMarriage());
+		user.setFavoriteFood(user.getFavoriteFood());//好きな
+
+		try {
+
+			//更新実行
+			boolean result = userService.updateOne(user);
+
+			if (result == true) {
+				model.addAttribute("result", "更新成功");
+			} else {
+				model.addAttribute("result", "更新失敗");
+			}
+
+		} catch (DataAccessException e) {
+
+			model.addAttribute("result", "更新失敗(トランザクションテスト)");
+
+		}
+
+		//ホーム画面を表示
+//		return "login/homeLayout";
+		return "redirect:/mypage";
+
+	}
+
 
 	/**
 	 * ユーザー一覧画面のGETメソッド用処理.
@@ -158,6 +204,7 @@ public class HomeController {
 			form.setBirthday(user.getBirthday()); //誕生日
 			form.setAge(user.getAge()); //年齢
 			form.setMarriage(user.isMarriage()); //結婚ステータス
+			form.setFavoriteFood(user.getFavoriteFood());//好きな
 
 			// Modelに登録
 			model.addAttribute("signupForm", form);
@@ -185,6 +232,8 @@ public class HomeController {
 		user.setBirthday(form.getBirthday());
 		user.setAge(form.getAge());
 		user.setMarriage(form.isMarriage());
+		user.setFavoriteFood(form.getFavoriteFood());//好きな
+
 
 		try {
 
@@ -204,10 +253,8 @@ public class HomeController {
 		}
 
 		//ホーム画面を表示
-		return "login/homeLayout";
-
-		//ユーザー一覧画面を表示
-		//    return getUserList(model);
+//		return getUserList(model);
+		return "redirect:/userList";
 	}
 
 	/**

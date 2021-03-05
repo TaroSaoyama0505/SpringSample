@@ -117,6 +117,22 @@
                         </div>
                     </td>
                 </tr>
+                <!-- 好きな食べ物の入力エリア -->
+                <tr>
+                    <th class="active">好きな食べ物</th>
+                    <td>
+                        <div class="form-group"
+                            th:classappend="${#fields.hasErrors('favoriteFood')} ? 'has-error'">
+                            <input type="text" class="form-control"
+                                th:field="*{favoriteFood}" />
+                            <span class="text-danger"
+                                th:if="${#fields.hasErrors('favoriteFood')}"
+                                th:errors="*{favoriteFood}">
+                                favoriteFood error
+                            </span>
+                        </div>
+                    </td>
+                </tr>
             </table>
             <!-- エラーメッセージの一覧表示 -->
             <ul>

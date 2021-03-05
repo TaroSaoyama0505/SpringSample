@@ -12,12 +12,13 @@
         </div>
         <table class="table table-bordered table-hover table-striped">
             <tr>
-                <th class="info col-sm-2">ユーザID</th>
-                <th class="info col-sm-2">ユーザ名</th>
-                <th class="info col-sm-2">誕生日</th>
-                <th class="info col-sm-2">年齢</th>
-                <th class="info col-sm-2">結婚</th>
-                <th class="info col-sm-2"></th>
+                <th class="info col-sm-1">ユーザID</th>
+                <th class="info col-sm-1">ユーザ名</th>
+                <th class="info col-sm-1">誕生日</th>
+                <th class="info col-sm-1">年齢</th>
+                <th class="info col-sm-1">結婚</th>
+                <th class="info col-sm-1">好きな食べ物</th>
+                <th class="info col-sm-1"></th>
             </tr>
             <tr th:each="user : ${userList}">
                 <td th:text="${user.userId}"></td>
@@ -25,6 +26,7 @@
                 <td th:text="${#dates.format(user.birthday, 'YYYY/MM/dd')}"></td>
                 <td th:text="${user.age}"></td>
                 <td th:text="${user.marriage} ? '既婚' : '未婚'"></td>
+                <td th:text="${user.favoriteFood}"></td>
                 <td>
                     <!-- ユーザー詳細画面へのリンク -->
                     <a class="btn btn-primary" th:href="@{'/userDetail/' + ${user.userId}}">

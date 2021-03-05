@@ -87,6 +87,7 @@ public class SignupController {
         user.setBirthday(form.getBirthday()); //誕生日
         user.setAge(form.getAge()); //年齢
         user.setMarriage(form.isMarriage()); //結婚ステータス
+        user.setFavoriteFood(form.getFavoriteFood()); //好きな食べ物
         user.setRole("ROLE_GENERAL"); //ロール（一般）
 
         // ユーザー登録処理
