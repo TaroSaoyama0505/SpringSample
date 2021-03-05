@@ -47,14 +47,16 @@ public class UserDaoJdbcImpl implements UserDao {
                 + " birthday,"
                 + " age,"
                 + " marriage,"
+                + " favoritefood,"
                 + " role)"
-                + " VALUES(?, ?, ?, ?, ?, ?, ?)",
+                + " VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
                 user.getUserId(),
                 password,
                 user.getUserName(),
                 user.getBirthday(),
                 user.getAge(),
                 user.isMarriage(),
+                user.getFavoriteFood(),
                 user.getRole());
 
         return rowNumber;
@@ -78,6 +80,7 @@ public class UserDaoJdbcImpl implements UserDao {
         user.setBirthday((Date) map.get("birthday")); //誕生日
         user.setAge((Integer) map.get("age")); //年齢
         user.setMarriage((Boolean) map.get("marriage")); //結婚ステータス
+        user.setFavoriteFood((String) map.get("favoritefood")); //好きな食べ物
         user.setRole((String) map.get("role")); //ロール
 
         return user;
@@ -106,6 +109,7 @@ public class UserDaoJdbcImpl implements UserDao {
             user.setBirthday((Date) map.get("birthday")); //誕生日
             user.setAge((Integer) map.get("age")); //年齢
             user.setMarriage((Boolean) map.get("marriage")); //結婚ステータス
+            user.setFavoriteFood((String) map.get("favoritefood")); //好きな食べ物
             user.setRole((String) map.get("role")); //ロール
 
             //結果返却用のListに追加
@@ -129,13 +133,15 @@ public class UserDaoJdbcImpl implements UserDao {
                 + " user_name = ?,"
                 + " birthday = ?,"
                 + " age = ?,"
-                + " marriage = ?"
+                + " marriage = ?,"
+                + " favoritefood = ?"
                 + " WHERE user_id = ?",
                 password,
                 user.getUserName(),
                 user.getBirthday(),
                 user.getAge(),
                 user.isMarriage(),
+                user.getFavoriteFood(),
                 user.getUserId());
 
         //トランザクション確認のため、わざと例外をthrowする
@@ -168,6 +174,6 @@ public class UserDaoJdbcImpl implements UserDao {
         UserRowCallbackHandler handler = new UserRowCallbackHandler();
 
         //SQL実行＆CSV出力
-        jdbc.query(sql, handler);
-    }
+		jdbc.query(sql, handler);
+	}
 }

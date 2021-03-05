@@ -13,5 +13,6 @@ CREATE TABLE IF NOT EXISTS m_user (
     birthday DATE,
     age INT,
     marriage BOOLEAN,
+    favoritefood VARCHAR(50),
     role VARCHAR(50)
 );
